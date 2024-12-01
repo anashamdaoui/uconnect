@@ -1,0 +1,33 @@
+{
+  "name": "uconnect-chrome-extension",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "preview": "vite preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "build:popup": "vite build --config vite.config.popup.ts",
+    "build:content": "vite build --config vite.config.content.ts",
+    "build:background": "vite build --config vite.config.background.ts",
+    "build": "npm run build:popup && npm run build:content && npm run build:background",
+    "generate-icons": "node public/assets/generate-icons.js",
+    "package": "npm run generate-icons && npm run build && cd dist && zip -r ../uconnect-extension.zip ."
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.1.2",
+    "@tsconfig/svelte": "^5.0.4",
+    "@types/chrome": "^0.0.260",
+    "sharp": "^0.32.6",
+    "svelte": "^4.2.19",
+    "svelte-check": "^3.8.6",
+    "tslib": "^2.7.0",
+    "typescript": "^5.5.3",
+    "vite": "^5.4.2"
+  },
+  "dependencies": {
+    "path": "^0.12.7",
+    "url": "^0.11.4",
+    "vite-plugin-static-copy": "^2.2.0"
+  }
+}

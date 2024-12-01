@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "UConnect",
+  "version": "1.0.0",
+  "description": "Jira customer support call management extension",
+  "permissions": [
+    "tabs",
+    "storage",
+    "cookies"
+  ],
+  "host_permissions": [
+    "https://enreach-services.atlassian.net/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://enreach-services.atlassian.net/*"],
+      "js": ["scripts/content/content.js"],
+      "css": ["scripts/content/content.css"]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/icon16.png",
+      "32": "assets/icon32.png",
+      "48": "assets/icon48.png",
+      "128": "assets/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "assets/icon16.png",
+    "32": "assets/icon32.png",
+    "48": "assets/icon48.png",
+    "128": "assets/icon128.png"
+  },
+  "background": {
+    "service_worker": "scripts/background/background.js",
+    "type": "module"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["scripts/content/content.css", "scripts/content/*"],
+      "matches": ["https://enreach-services.atlassian.net/*"]
+    }
+  ]
+}
