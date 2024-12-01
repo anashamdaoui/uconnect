@@ -40,7 +40,7 @@
   {/if}
 </div>
 
-<style>
+<!-- <style>
   .uconnect-container {
     width: 100%;
     background: white;
@@ -63,3 +63,4 @@
     cursor: pointer;
   }
 </style>
+ -->

@@ -39,7 +39,7 @@
   </div>
 {/if}
 
-<style>
+<!-- <style>
   .user-list {
     max-height: 300px;
     overflow-y: auto;
@@ -108,4 +108,4 @@
   .user-list::-webkit-scrollbar-thumb:hover {
     background: #555;
   }
-</style>
+</style> -->

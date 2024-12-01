@@ -1,31 +1,128 @@
+/* Reset styles for extension elements with high specificity */
 #uconnect-extension-root {
-    position: fixed;
-    top: 0;
-    right: 0;
-    z-index: 999999;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-    width: 400px;
-    height: 100vh;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
-  }
-  
-  /* Reset styles for extension elements */
-  #uconnect-extension-root * {
-    all: revert;
-    box-sizing: border-box;
-  }
-  
-  /* Ensure our styles take precedence */
-  #uconnect-extension-root button,
-  #uconnect-extension-root input,
-  #uconnect-extension-root div {
-    font-family: inherit;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
-  }
+  position: fixed !important;
+  top: 0px !important;
+  right: 0px !important;
+  z-index: 2147483647 !important;
+  background: white !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  width: 400px !important;
+  height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif !important;
+}
+
+/* Ensure our styles take precedence with high specificity */
+#uconnect-extension-root * {
+  all: revert !important;
+  box-sizing: border-box !important;
+}
+
+/* Component-specific styles with high specificity */
+#uconnect-extension-root .user-header {
+  padding: 6px !important;
+  background-color: #f5f5f5 !important;
+  border-bottom: 1px solid #e0e0e0 !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+}
+
+#uconnect-extension-root .search-container {
+  display: flex !important;
+  gap: 8px !important;
+  padding: 8px !important;
+}
+
+#uconnect-extension-root .search-input {
+  flex: 1 !important;
+  padding: 8px !important;
+  border: 1px solid #dfe1e6 !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
+  outline: none !important;
+}
+
+#uconnect-extension-root .call-button {
+  padding: 8px 16px !important;
+  background-color: #4caf50 !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 3px !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s ease !important;
+}
+
+#uconnect-extension-root .call-button:disabled {
+  background-color: #E6E6E6 !important;
+  cursor: not-allowed !important;
+}
+
+#uconnect-extension-root .user-list {
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  border: 1px solid #dfe1e6 !important;
+  border-radius: 3px !important;
+  margin: 8px !important;
+  background-color: white !important;
+}
+
+#uconnect-extension-root .user-item {
+  padding: 12px !important;
+  cursor: pointer !important;
+  border-bottom: 1px solid #dfe1e6 !important;
+  transition: background-color 0.2s ease !important;
+}
+
+#uconnect-extension-root .user-item:last-child {
+  border-bottom: none !important;
+}
+
+#uconnect-extension-root .user-item:hover {
+  background-color: #f4f5f7 !important;
+}
+
+#uconnect-extension-root .user-item.selected {
+  background-color: #deebff !important;
+}
+
+#uconnect-extension-root .user-info {
+  text-align: left !important;
+}
+
+#uconnect-extension-root .user-name {
+  font-weight: 500 !important;
+  color: #172b4d !important;
+  margin-bottom: 4px !important;
+}
+
+#uconnect-extension-root .user-email {
+  font-size: 12px !important;
+  color: #6b778c !important;
+}
+
+#uconnect-extension-root .no-results {
+  padding: 16px !important;
+  text-align: center !important;
+  color: #6b778c !important;
+  font-style: italic !important;
+}
+
+/* Scrollbar styling */
+#uconnect-extension-root .user-list::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+#uconnect-extension-root .user-list::-webkit-scrollbar-track {
+  background: #f1f1f1 !important;
+  border-radius: 3px !important;
+}
+
+#uconnect-extension-root .user-list::-webkit-scrollbar-thumb {
+  background: #888 !important;
+  border-radius: 3px !important;
+}
+
+#uconnect-extension-root .user-list::-webkit-scrollbar-thumb:hover {
+  background: #555 !important;
+}

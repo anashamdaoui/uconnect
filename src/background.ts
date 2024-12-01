@@ -1,31 +1,25 @@
 import { JIRA_ENDPOINTS } from './utils/jiraApi';
-import {MessageTypes} from './utils/messageTypes';
-
-/*// Message types
-const MessageTypes = {
-  API_REQUEST: 'API_REQUEST',
-  CHECK_SESSION: 'CHECK_SESSION',
-  SESSION_STATUS: 'SESSION_STATUS'
-} as const;
-*/
+import { MessageTypes } from './utils/messageTypes';
 
 // Session check interval (5 minutes)
 const SESSION_CHECK_INTERVAL = 5 * 60 * 1000;
 
+let isContentDisplayed = false;
+
 // Handle API requests through background script
 async function handleApiRequest(endpoint: string, options: RequestInit = {}) {
   const JIRA_BASE_URL = 'https://enreach-services.atlassian.net';
-  
+
   try {
     const response = await fetch(`${JIRA_BASE_URL}${endpoint}`, {
       ...options,
       credentials: 'include'
     });
-    
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('API request failed:', error);
@@ -60,7 +54,7 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
       .catch(error => sendResponse({ error: error.message }));
     return true;
   }
-  
+
   if (message.type === MessageTypes.CHECK_SESSION) {
     checkSession()
       .then(sendResponse)
@@ -69,9 +63,19 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 });
 
-// Initial session check
-checkSession();
+// Handle extension icon click
+chrome.action.onClicked.addListener((tab) => {
+  isContentDisplayed = !isContentDisplayed;
+  if (tab.id !== undefined) {
+    chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_EXTENSION', show: isContentDisplayed });
+  } else {
+    console.error('Tab ID is undefined. Unable to send message.');
+  }
+});
 
 chrome.runtime.onInstalled.addListener(() => {
   console.log("Extension Installed");
 });
+
+// Initial session check
+checkSession();

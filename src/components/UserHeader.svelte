@@ -18,7 +18,7 @@
   {/if}
 </div>
 
-<style>
+<!-- <style>
   .user-header {
     padding: 6px;
     background-color: #f5f5f5; /* Light gray background */
@@ -68,4 +68,4 @@
 	.logout-button:hover {
 		background-color: #d32f2fed; /* Darker red on hover */
 	}
-</style>
+</style> -->

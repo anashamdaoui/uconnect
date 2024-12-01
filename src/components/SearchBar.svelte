@@ -36,7 +36,7 @@
   📞 
   </button>
 </div>
-
+<!--
 <style>
   .search-container {
     display: flex;
@@ -68,3 +68,4 @@
     cursor: not-allowed;
   }
 </style>
+-->
