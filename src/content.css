@@ -5,50 +5,159 @@
   right: 0px !important;
   z-index: 2147483647 !important;
   background: white !important;
-  border-radius: 8px !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  width: 400px !important;
-  height: 100vh;
+  width: 450px !important;
+  height: 100vh !important;
+  display: flex !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif !important;
 }
 
-/* Ensure our styles take precedence with high specificity */
 #uconnect-extension-root * {
   all: revert !important;
   box-sizing: border-box !important;
+  font-family: inherit !important;
 }
 
-/* Component-specific styles with high specificity */
-#uconnect-extension-root .user-header {
-  padding: 6px !important;
+/* Sidebar Styles */
+#uconnect-extension-root .sidebar {
+  width: 40px !important;
   background-color: #f5f5f5 !important;
-  border-bottom: 1px solid #e0e0e0 !important;
   display: flex !important;
-  justify-content: space-between !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  border-right: 1px solid #bdc3c7 !important;
+}
+
+#uconnect-extension-root .sidebar .sidebar-header {
+  display: flex !important;
+  justify-content: center !important;
+  padding: 10px 0 !important;
+  border-bottom: 1px solid #e0e0e0c6 !important;
+}
+
+#uconnect-extension-root .sidebar-scroll-view {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  padding: 10px 0 !important;
+  overflow-y: auto !important;
+}
+
+#uconnect-extension-root .sidebar-footer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  padding: 10px 0 !important;
+  border-top: 1px solid #e0e0e0 !important;
+}
+
+#uconnect-extension-root .sidebar-btn {
+  background: none !important;
+  border: none !important;
+  font-size: 20px !important;
+  cursor: pointer !important;
+  margin: 10px 0 !important;
+  transition: transform 0.2s ease !important;
+  padding: 5px !important;
+}
+
+#uconnect-extension-root .sidebar-btn:hover {
+  transform: scale(1.2) !important;
+  background-color: #f0f0f0 !important;
+  border-radius: 5px !important;
+}
+
+#uconnect-extension-root .close-btn {
+  font-size: 24px !important;
+  margin: 0 !important;
+}
+
+#uconnect-extension-root .logout-btn {
+  margin-top: auto !important;
+}
+
+/* Main Content Styles */
+#uconnect-extension-root .main-content {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  height: 100% !important;
+  width: calc(100% - 40px) !important;
+  /* Subtract sidebar width */
+}
+
+/* Ensure the container uses full width and flex layout */
+#uconnect-extension-root .uconnect-container {
+  display: flex !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* Header Bar Styles */
+#uconnect-extension-root .header-bar {
+  padding: 10px 15px !important;
+  border-bottom: 1px solid #e0e0e0c6 !important;
+  height: 60px !important;
+  /* Fixed height to match sidebar header */
+  display: flex !important;
   align-items: center !important;
 }
 
+/* User Details Styles */
+#uconnect-extension-root .user-details {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+#uconnect-extension-root .user-details .full-name {
+  font-weight: 700 !important;
+  /* Stronger font weight */
+  font-size: 16px !important;
+  color: #333 !important;
+  margin-bottom: 4px !important;
+  line-height: 1.2 !important;
+}
+
+#uconnect-extension-root .user-details .email-address {
+  font-weight: 400 !important;
+  font-size: 12px !important;
+  color: #666 !important;
+  line-height: 1.2 !important;
+}
+
+/* Additional specificity and reset for injected sites */
+#uconnect-extension-root .user-details * {
+  all: unset !important;
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+  display: block !important;
+}
+
+/* Search Bar Styles */
 #uconnect-extension-root .search-container {
   display: flex !important;
-  gap: 8px !important;
-  padding: 8px !important;
+  gap: 15px !important;
+  padding: 24px !important;
 }
 
 #uconnect-extension-root .search-input {
   flex: 1 !important;
-  padding: 8px !important;
-  border: 1px solid #dfe1e6 !important;
+  padding: 10px !important;
+  border: 1px solid #bdc3c7 !important;
   border-radius: 20px !important;
   font-size: 14px !important;
   outline: none !important;
 }
 
 #uconnect-extension-root .call-button {
-  padding: 8px 16px !important;
+  padding: 10px 15px !important;
   background-color: #4caf50 !important;
   color: white !important;
   border: none !important;
-  border-radius: 3px !important;
+  border-radius: 5px !important;
   cursor: pointer !important;
   transition: background-color 0.3s ease !important;
 }
@@ -58,6 +167,120 @@
   cursor: not-allowed !important;
 }
 
+/* Settings Form Styles */
+#uconnect-extension-root .settings-form {
+  padding: 20px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+#uconnect-extension-root .settings-form .form-group {
+  margin-bottom: 15px !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* - Telephony server settings */
+#uconnect-extension-root .settings-form .form-group .server-input-group {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+#uconnect-extension-root .settings-form .form-group .check-btn,
+#uconnect-extension-root .settings-form .form-group .connect-btn {
+  padding: 5px 10px !important;
+  background-color: #007bff !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+}
+
+#uconnect-extension-root .settings-form .form-group .check-btn:hover,
+#uconnect-extension-root .settings-form .form-group .connect-btn:hover {
+  background-color: #0056b3 !important;
+}
+
+#uconnect-extension-root .settings-form .form-group .session-message {
+  display: block !important;
+  /* Ensures it's always below */
+  margin-top: 5px !important;
+  /* Adds spacing between input and message */
+  font-size: 0.6rem !important;
+  color: green;
+}
+
+#uconnect-extension-root .settings-form .form-group .session-message.error {
+  color: red !important;
+}
+
+#uconnect-extension-root .settings-form .radio-label {
+  margin-right: 15px !important;
+}
+
+#uconnect-extension-root .settings-form .save-settings {
+  background-color: #4caf50 !important;
+  color: white !important;
+  border: none !important;
+  padding: 10px 15px !important;
+  border-radius: 5px !important;
+  align-self: flex-start !important;
+  cursor: pointer !important;
+}
+
+#uconnect-extension-root .settings-form .save-settings:hover {
+  background-color: #3d8d40 !important;
+}
+
+/* Toggle Switch Styles */
+#uconnect-extension-root .settings-form .switch {
+  position: relative !important;
+  display: inline-block !important;
+  width: 40px !important;
+  height: 20px !important;
+}
+
+#uconnect-extension-root .settings-form .switch input {
+  opacity: 0 !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+#uconnect-extension-root .settings-form .slider {
+  position: absolute !important;
+  cursor: pointer !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-color: #ccc !important;
+  transition: .4s !important;
+  border-radius: 20px !important;
+}
+
+#uconnect-extension-root .settings-form .slider:before {
+  position: absolute !important;
+  content: "" !important;
+  height: 16px !important;
+  width: 16px !important;
+  left: 2px !important;
+  bottom: 2px !important;
+  background-color: white !important;
+  transition: .4s !important;
+  border-radius: 50% !important;
+}
+
+#uconnect-extension-root .settings-form input:checked+.slider {
+  background-color: #4caf50 !important;
+}
+
+#uconnect-extension-root .settings-form input:checked+.slider:before {
+  transform: translateX(20px) !important;
+}
+
+/* SearchResult Styles */
 #uconnect-extension-root .user-list {
   max-height: 300px !important;
   overflow-y: auto !important;
@@ -86,21 +309,6 @@
   background-color: #deebff !important;
 }
 
-#uconnect-extension-root .user-info {
-  text-align: left !important;
-}
-
-#uconnect-extension-root .user-name {
-  font-weight: 500 !important;
-  color: #172b4d !important;
-  margin-bottom: 4px !important;
-}
-
-#uconnect-extension-root .user-email {
-  font-size: 12px !important;
-  color: #6b778c !important;
-}
-
 #uconnect-extension-root .no-results {
   padding: 16px !important;
   text-align: center !important;
@@ -125,4 +333,69 @@
 
 #uconnect-extension-root .user-list::-webkit-scrollbar-thumb:hover {
   background: #555 !important;
+}
+
+/* Phone context menu styles */
+.uconnect-phone-context-menu {
+  position: fixed !important;
+  background: white !important;
+  border: 1px solid #ddd !important;
+  border-radius: 4px !important;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  padding: 8px !important;
+  z-index: 2147483647 !important;
+  min-width: 150px !important;
+}
+
+.uconnect-phone-context-menu .phone-number {
+  font-size: 14px !important;
+  padding: 4px 8px !important;
+  border-bottom: 1px solid #eee !important;
+  margin-bottom: 4px !important;
+  color: #333 !important;
+}
+
+.uconnect-phone-context-menu .phone-menu-items {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.uconnect-phone-context-menu .menu-item {
+  display: block !important;
+  width: 100% !important;
+  padding: 6px 8px !important;
+  border: none !important;
+  background: none !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  font-size: 14px !important;
+  color: #333 !important;
+}
+
+.uconnect-phone-context-menu .menu-item:hover {
+  background: #f5f5f5 !important;
+}
+
+/* Toast notification styles */
+.uconnect-toast {
+  position: fixed !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background: rgba(0, 0, 0, 0.8) !important;
+  color: white !important;
+  padding: 8px 16px !important;
+  border-radius: 4px !important;
+  font-size: 14px !important;
+  z-index: 2147483647 !important;
+  animation: toast-fade 3s ease !important;
+}
+
+@keyframes toast-fade {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  10% { opacity: 1; transform: translate(-50%, 0); }
+  90% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
 }

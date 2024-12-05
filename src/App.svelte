@@ -6,11 +6,19 @@
     fetchProjectUsers,
     redirectToJiraLogin,
   } from "./services/jiraService";
-  import UserHeader from "./components/UserHeader.svelte";
+  import SideBar from "./components/SideBar.svelte";
+  import HeaderBar from "./components/HeaderBar.svelte";
   import SearchBar from "./components/SearchBar.svelte";
-  import UserList from "./components/UserList.svelte";
+  import SearchResult from "./components/SearchResult.svelte";
+  import SettingsForm from "./components/SettingsForm.svelte";
+  import { get } from 'svelte/store';
+  import { settingsStore } from './stores/settingsStore';
+  import { currentView } from './stores/viewStore';
 
   let error = null;
+  // Subscribe to the settings store
+  let settings = get(settingsStore);
+  let telephonyServer = settings.telephonyServer;
 
   try {
     console.log("App started");
@@ -29,9 +37,16 @@
 
 <div class="uconnect-container">
   {#if $jiraSession.isLoggedIn}
-    <UserHeader />
-    <SearchBar />
-    <UserList />
+    <SideBar />
+    <main class="main-content">
+      <HeaderBar />
+      {#if $currentView === "search"}
+        <SearchBar />
+        <SearchResult />
+      {:else if $currentView === "settings"}
+        <SettingsForm />
+      {/if}
+    </main>
   {:else}
     <div class="login-prompt">
       <p>You are not connected to JIRA</p>
@@ -39,28 +54,3 @@
     </div>
   {/if}
 </div>
-
-<!-- <style>
-  .uconnect-container {
-    width: 100%;
-    background: white;
-    border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .login-prompt {
-    padding: 20px;
-    text-align: center;
-  }
-
-  .login-prompt button {
-    margin-top: 12px;
-    padding: 8px 16px;
-    background-color: #0052cc;
-    color: white;
-    border: none;
-    border-radius: 3px;
-    cursor: pointer;
-  }
-</style>
- -->

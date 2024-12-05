@@ -1,4 +1,4 @@
-import { JIRA_ENDPOINTS } from './utils/jiraApi';
+import { JIRA_ENDPOINTS, JIRA_BASE_URL } from './utils/jiraApi';
 import { MessageTypes } from './utils/messageTypes';
 
 // Session check interval (5 minutes)
@@ -8,8 +8,6 @@ let isContentDisplayed = false;
 
 // Handle API requests through background script
 async function handleApiRequest(endpoint: string, options: RequestInit = {}) {
-  const JIRA_BASE_URL = 'https://enreach-services.atlassian.net';
-
   try {
     const response = await fetch(`${JIRA_BASE_URL}${endpoint}`, {
       ...options,
@@ -28,7 +26,7 @@ async function handleApiRequest(endpoint: string, options: RequestInit = {}) {
 }
 
 // Check Jira session
-async function checkSession() {
+async function checkJiraSession() {
   try {
     const userData = await handleApiRequest(JIRA_ENDPOINTS.myself);
     return { isLoggedIn: true, currentUser: userData };
@@ -39,7 +37,7 @@ async function checkSession() {
 
 // Set up periodic session checks
 setInterval(async () => {
-  const sessionStatus = await checkSession();
+  const sessionStatus = await checkJiraSession();
   chrome.runtime.sendMessage({
     type: MessageTypes.SESSION_STATUS,
     payload: sessionStatus
@@ -48,6 +46,7 @@ setInterval(async () => {
 
 // Listen for messages from content script and popup
 chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  // Existing message handlers
   if (message.type === MessageTypes.API_REQUEST) {
     handleApiRequest(message.endpoint, message.options)
       .then(sendResponse)
@@ -56,20 +55,82 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
   }
 
   if (message.type === MessageTypes.CHECK_SESSION) {
-    checkSession()
+    checkJiraSession()
       .then(sendResponse)
       .catch(error => sendResponse({ error: error.message }));
     return true;
+  }
+
+  // New permission request handler
+  if (message.type === MessageTypes.REQUEST_PERMISSION) {
+    // Check if chrome.permissions is available
+    if (chrome.permissions) {
+      chrome.permissions.request(
+        { origins: [`${message.url}/*`] },
+        (granted) => {
+          sendResponse({ granted: granted });
+        }
+      );
+      return true; // Indicates we wish to send a response asynchronously
+    } else {
+      sendResponse({ 
+        granted: false, 
+        error: 'Permissions API not available' 
+      });
+      return false;
+    }
+  }
+
+  // Existing toggle extension handler
+  if (message.type === MessageTypes.TOGGLE_EXTENSION) {
+    isContentDisplayed = message.show;
+    // Broadcast the state change to all tabs
+    chrome.tabs.query({}, (tabs) => {
+      tabs.forEach(tab => {
+        if (tab.id) {
+          chrome.tabs.sendMessage(tab.id, {
+            type: MessageTypes.TOGGLE_EXTENSION,
+            show: isContentDisplayed
+          });
+        }
+      });
+    });
+  }
+
+  // Handle cookie check request
+  if (message.type === MessageTypes.CHECK_COOKIE) {
+    try {
+      chrome.cookies.get(
+        {
+          url: message.url,
+          name: message.cookieName
+        },
+        (cookie) => {
+          sendResponse({ 
+            exists: !!cookie, 
+            cookie: cookie 
+          });
+        }
+      );
+      return true; // Indicates asynchronous response
+    } catch (error) {
+      sendResponse({ 
+        exists: false, 
+        error: error instanceof Error ? error.message : String(error) 
+      });
+      return false;
+    }
   }
 });
 
 // Handle extension icon click
 chrome.action.onClicked.addListener((tab) => {
   isContentDisplayed = !isContentDisplayed;
-  if (tab.id !== undefined) {
-    chrome.tabs.sendMessage(tab.id, { type: 'TOGGLE_EXTENSION', show: isContentDisplayed });
-  } else {
-    console.error('Tab ID is undefined. Unable to send message.');
+  if (tab.id) {
+    chrome.tabs.sendMessage(tab.id, {
+      type: 'TOGGLE_EXTENSION',
+      show: isContentDisplayed
+    });
   }
 });
 
@@ -78,4 +139,4 @@ chrome.runtime.onInstalled.addListener(() => {
 });
 
 // Initial session check
-checkSession();
+checkJiraSession();

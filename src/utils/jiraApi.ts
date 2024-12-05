@@ -1,4 +1,5 @@
-const JIRA_BASE_URL = 'https://enreach-services.atlassian.net';
+
+export const JIRA_BASE_URL = 'https://enreach-services.atlassian.net';
 
 export async function fetchWithJiraSession(endpoint: string, options: RequestInit = {}) {
   try {

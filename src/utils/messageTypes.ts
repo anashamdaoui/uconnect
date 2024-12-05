@@ -1,7 +1,11 @@
 export const MessageTypes = {
     API_REQUEST: 'API_REQUEST',
     CHECK_SESSION: 'CHECK_SESSION',
-    SESSION_STATUS: 'SESSION_STATUS'
+    SESSION_STATUS: 'SESSION_STATUS',
+    CHECK_COOKIE: 'CHECK_COOKIE',
+    REQUEST_PERMISSION: 'REQUEST_ORIGIN_PERMISSION',
+    TOGGLE_EXTENSION: 'TOGGLE_EXTENSION',
+    OPEN_TAB: 'OPEN_TAB'
   } as const;
   
   export type MessageType = typeof MessageTypes[keyof typeof MessageTypes];
