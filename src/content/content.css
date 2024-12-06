@@ -7,7 +7,7 @@
   background: white !important;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   width: 450px !important;
-  height: 100vh !important;
+  height: 80vh !important;
   display: flex !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif !important;
 }
@@ -398,4 +398,118 @@
   10% { opacity: 1; transform: translate(-50%, 0); }
   90% { opacity: 1; transform: translate(-50%, 0); }
   100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+/* Power-UP bar call control */
+#uconnect-power-up-call-control {
+  position: fixed !important;
+  z-index: 2147483647 !important;
+}
+
+.uconnect-power-up-container {
+  position: fixed !important;
+  background: white !important;
+  border-radius: 24px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  padding: 4px !important;
+  transition: width 0.3s ease !important;
+}
+
+.uconnect-power-up-container .drag-handle {
+  position: absolute !important;
+  top: -10px !important;
+  left: 0 !important;
+  right: 0 !important;
+  height: 10px !important;
+  background: transparent !important;
+  cursor: move !important;
+  outline: none !important;
+}
+
+.uconnect-power-up-container .drag-handle:focus {
+  outline: 2px solid blue !important;
+}
+
+.uconnect-power-up-container .call-bar {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  padding: 4px !important;
+  border-radius: 24px !important;
+  transition: width 0.3s ease !important;
+}
+
+.uconnect-power-up-container .call-bar.compact {
+  width: 48px !important;
+  height: 48px !important;
+  padding: 0 !important;
+}
+
+.uconnect-power-up-container .call-bar.expanded {
+  width: auto !important;
+  padding: 4px 8px !important;
+}
+
+.uconnect-power-up-container .compact-button,
+.uconnect-power-up-container .call-button,
+.uconnect-power-up-container .hangup-button,
+.uconnect-power-up-container .mute-button {
+  background: none !important;
+  border: none !important;
+  border-radius: 50% !important;
+  cursor: pointer !important;
+  font-size: 24px !important;
+  padding: 8px !important;
+  transition: transform 0.2s ease !important;
+  width: 48px !important;
+  height: 48px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.uconnect-power-up-container .compact-button:hover,
+.uconnect-power-up-container .call-button:hover,
+.uconnect-power-up-container .hangup-button:hover,
+.uconnect-power-up-container .mute-button:hover {
+  transform: scale(1.1) !important;
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+
+.uconnect-power-up-container .compact-button {
+  color: #4CAF50 !important;
+}
+
+.uconnect-power-up-container .call-button {
+  color: #4CAF50 !important;
+}
+
+.uconnect-power-up-container .hangup-button {
+  color: #f44336 !important;
+}
+
+.uconnect-power-up-container .mute-button.unmuted {
+  color: #f44336 !important;
+}
+
+.uconnect-power-up-container .mute-button.muted {
+  color: #4CAF50 !important;
+}
+
+.uconnect-power-up-container .search-input {
+  flex: 1 !important;
+  min-width: 150px !important;
+  padding: 8px 12px !important;
+  border: 1px solid #ddd !important;
+  border-radius: 20px !important;
+  font-size: 14px !important;
+  margin-left: 4px !important;
+}
+
+.uconnect-power-up-container .duration {
+  font-size: 14px !important;
+  color: #666 !important;
+  min-width: 50px !important;
+  text-align: center !important;
+  padding: 0 8px !important;
 }

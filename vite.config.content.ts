@@ -12,7 +12,7 @@ export default defineConfig({
     viteStaticCopy({
       targets: [
         {
-          src: 'src/content.css',
+          src: 'src/content/content.css',
           dest: '.',
         }
       ],
@@ -22,7 +22,7 @@ export default defineConfig({
     outDir: 'dist/scripts/content',
     rollupOptions: {
       input: {
-        content: resolve(__dirname, 'src/content.ts'),
+        content: resolve(__dirname, 'src/content/content.ts'),
       },
       output: {
         entryFileNames: '[name].js',

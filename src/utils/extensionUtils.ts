@@ -18,3 +18,10 @@ export function toggleExtension(): void {
   chrome.runtime.sendMessage({ type: 'TOGGLE_EXTENSION', show: newState });
   toggleExtensionDisplay(newState);
 }
+
+export function togglePowerUPContainerDisplay(show: boolean): void {
+  const container = document.getElementById('uconnect-power-up-container');
+  if(container) {
+    container.style.cssText = `display: ${show ? "block" : "none"} !important;`;
+  }
+}

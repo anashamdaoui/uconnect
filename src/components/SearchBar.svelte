@@ -1,5 +1,6 @@
 <script lang="ts">
-  import { searchQuery, selectedUser, showResults } from '../stores/jiraStore';
+  import { selectedUser } from '../stores/jiraStore';
+  import { searchQuery, showResults } from '../stores/searchStore';
   
   function handleInput(event: Event) {
     const target = event.target as HTMLInputElement;
