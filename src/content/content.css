@@ -430,6 +430,11 @@
   outline: 2px solid blue !important;
 }
 
+.uconnect-power-up-container.no-drag,
+.uconnect-power-up-container .drag-handle.no-drag {
+  cursor: default !important;
+}
+
 .uconnect-power-up-container .call-bar {
   display: flex !important;
   align-items: center !important;
@@ -458,7 +463,6 @@
   border: none !important;
   border-radius: 50% !important;
   cursor: pointer !important;
-  font-size: 24px !important;
   padding: 8px !important;
   transition: transform 0.2s ease !important;
   width: 48px !important;
@@ -466,6 +470,11 @@
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
+}
+
+.uconnect-power-up-container .mute-button svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
 .uconnect-power-up-container .compact-button:hover,
