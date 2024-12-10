@@ -442,6 +442,9 @@
   padding: 4px !important;
   border-radius: 24px !important;
   transition: width 0.3s ease !important;
+  position: fixed;
+  background-color: whitesmoke;
+  z-index: 100000;
 }
 
 .uconnect-power-up-container .call-bar.compact {
@@ -521,4 +524,16 @@
   min-width: 50px !important;
   text-align: center !important;
   padding: 0 8px !important;
+}
+
+.compact-view,
+.search-view,
+.active-view {
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+}
+
+.active-view {
+    flex-direction: row;
 }

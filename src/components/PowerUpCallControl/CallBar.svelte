@@ -82,11 +82,24 @@
 <div
     class="call-bar"
     class:compact={$currentState === CallState.Compact}
-    class:expanded={$currentState !== CallState.Compact}
+    class:expanded={$currentState === CallState.Search ||
+        $currentState === CallState.Active}
 >
-    {#if $currentState === CallState.Compact}
+    <!-- Compact State -->
+    <div
+        class="compact-view"
+        style="display: {$currentState === CallState.Compact
+            ? 'block'
+            : 'none'};"
+    >
         <button class="compact-button" on:click={expandToSearchMode}>✆</button>
-    {:else if $currentState === CallState.Search}
+    </div>
+
+    <!-- Search State -->
+    <div
+        class="search-view"
+        style="display: {$currentState === CallState.Search ? 'flex' : 'none'};"
+    >
         <input
             type="text"
             class="search-input"
@@ -94,7 +107,13 @@
             placeholder="Search contact"
         />
         <button class="call-button" on:click={initiateCall}>✆</button>
-    {:else if $currentState === CallState.Active}
+    </div>
+
+    <!-- Active Call State -->
+    <div
+        class="active-view"
+        style="display: {$currentState === CallState.Active ? 'flex' : 'none'};"
+    >
         <button class="hangup-button" on:click={endCall}>✆</button>
         <button
             class="mute-button"
@@ -120,5 +139,5 @@
         <div class="duration">
             {formatDuration($callDuration)}
         </div>
-    {/if}
+    </div>
 </div>
